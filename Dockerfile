@@ -11,7 +11,7 @@ RUN \
 	cat /etc/os-release
 
 RUN \
-	GIT_TRACE=1 GIT_CURL_VERBOSE=1 git clone --depth 50 https://github.com/openscad/openscad . && \
+	git clone https://github.com/openscad/openscad . && \
 	git checkout "${BRANCH}" && \
 	git rev-parse --abbrev-ref HEAD && \
 	git log -n8 --pretty=tformat:"%h %ai (%aN) %s"
