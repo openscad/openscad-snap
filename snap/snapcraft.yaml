@@ -23,7 +23,17 @@ confinement: strict
 icon: images/openscad-256.png
 license: GPL-3.0
 grade: stable
-architectures: [amd64 arm64, i386, s390x, ppc64el]
+architectures:
+  - build-on: amd64
+    run-on: amd64
+  - build-on: i386
+    run-on: i386
+  - build-on: arm64
+    run-on: arm64
+  - build-on: s390x
+    run-on: s390x
+  - build-on: ppc64el
+    run-on: ppc64el
 #adopt-info: openscad
 
 apps:
