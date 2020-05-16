@@ -72,13 +72,20 @@ parts:
     - libboost-system1.65.1
     - libboost-thread1.65.1
 
+  lib3mf:
+    source: https://github.com/3MFConsortium/lib3mf/archive/v1.8.1.tar.gz
+    plugin: cmake
+    configflags: [ "-DCMAKE_BUILD_TYPE=RelWithDebInfo", "-DLIB3MF_TESTS=OFF" ]
+    build-packages:
+    - uuid-dev
+
   openscad:
     source: https://files.openscad.org/openscad-2019.05.src.tar.gz
     #parse-info: [usr/share/metainfo/org.openscad.OpenSCAD.appdata.xml]
     disable-parallel: true
     plugin: qmake
     qt-version: qt5
-    after: [desktop-qt5, opencsg, cgal]
+    after: [desktop-qt5, opencsg, cgal, lib3mf]
     project-files: [ "openscad.pro" ]
     options: [ "PREFIX=/usr", "CONFIG-=experimental", "CONFIG-=debug", "VERSION=2019.05" ]
     build-packages:
