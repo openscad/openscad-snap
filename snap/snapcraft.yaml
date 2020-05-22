@@ -39,7 +39,7 @@ architectures:
 apps:
   openscad:
     command: desktop-launch openscad
-    plugs: [desktop, x11, wayland, opengl, home, audio-playback, pulseaudio, network, removable-media]
+    plugs: [desktop, x11, wayland, opengl, home, audio-playback, pulseaudio, network, removable-media, joystick]
     desktop: usr/share/applications/openscad.desktop
     environment:
       DISABLE_WAYLAND: 1
