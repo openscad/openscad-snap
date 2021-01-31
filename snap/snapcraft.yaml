@@ -69,8 +69,8 @@ parts:
     - libboost-dev
     - libboost-thread-dev
     stage-packages:
-    - libboost-system1.58.0
-    - libboost-thread1.58.0
+    - libboost-system1.65.0
+    - libboost-thread1.65.0
 
   lib3mf:
     source: https://github.com/3MFConsortium/lib3mf/archive/v1.8.1.tar.gz
@@ -129,10 +129,10 @@ parts:
     stage-packages:
     - qtwayland5
     - libasyncns0
-    - libboost-filesystem1.58.0
-    - libboost-regex1.58.0
-    - libboost-system1.58.0
-    - libboost-program-options1.58.0
+    - libboost-filesystem1.65.0
+    - libboost-regex1.65.0
+    - libboost-system1.65.0
+    - libboost-program-options1.65.0
     - libdouble-conversion1v5
     - libflac8
     - libglew1.13
