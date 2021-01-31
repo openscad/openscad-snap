@@ -1,7 +1,7 @@
 name: openscad
 title: OpenSCAD
-base: core
-version: "2019.05"
+base: core20
+version: "2021.01"
 summary: OpenSCAD - Design. Code. Create.
 description: >
     OpenSCAD is a software for creating solid 3D CAD models. It is free software and
@@ -84,14 +84,14 @@ parts:
     - uuid-dev
 
   openscad:
-    source: https://files.openscad.org/openscad-2019.05.src.tar.gz
+    source: https://files.openscad.org/openscad-2021.01.src.tar.gz
     #parse-info: [usr/share/metainfo/org.openscad.OpenSCAD.appdata.xml]
     disable-parallel: true
     plugin: qmake
     qt-version: qt5
     after: [desktop-qt5, opencsg, cgal, lib3mf]
     project-files: [ "openscad.pro" ]
-    options: [ "PREFIX=/usr", "CONFIG-=experimental", "CONFIG-=debug", "VERSION=2019.05" ]
+    options: [ "PREFIX=/usr", "CONFIG-=experimental", "CONFIG-=debug", "VERSION=2021.01" ]
     build-packages:
     - git
     - qt5-default
@@ -106,6 +106,7 @@ parts:
     - libglew-dev
     - libgmp-dev
     - libmpfr-dev
+    - libcairo2-dev
     - python
     - cmake
     - libboost-dev
