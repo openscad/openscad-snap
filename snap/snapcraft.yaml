@@ -125,7 +125,7 @@ parts:
     - libharfbuzz-dev
     - libfreetype6-dev
     - libfontconfig1-dev
-    - libqt5scintilla2-dev
+    - libqscintilla2-qt5-dev
     stage-packages:
     - qtwayland5
     - libasyncns0
@@ -140,7 +140,7 @@ parts:
     - libmpfr4
     - libogg0
     - libpulse0
-    - libqt5scintilla2-12v5
+    - libqscintilla2-qt5-13
     - libqt5multimedia5
     - libqt5printsupport5
     - libsndfile1
