@@ -1,6 +1,6 @@
 name: openscad
 title: OpenSCAD
-base: core20
+base: core18
 version: "2021.01"
 summary: OpenSCAD - Design. Code. Create.
 description: >
