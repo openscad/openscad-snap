@@ -57,7 +57,7 @@ parts:
     build-packages:
     - freeglut3-dev
     stage-packages:
-    - libglew1.13
+    - libglew2.0
 
   cgal:
     disable-parallel: true
@@ -135,7 +135,7 @@ parts:
     - libboost-program-options1.65.1
     - libdouble-conversion1v5
     - libflac8
-    - libglew1.13
+    - libglew2.0
     - libglu1-mesa
     - libmpfr4
     - libogg0
