@@ -137,7 +137,7 @@ parts:
     - libflac8
     - libglew2.0
     - libglu1-mesa
-    - libmpfr4
+    - libmpfr6
     - libogg0
     - libpulse0
     - libqscintilla2-qt5-13
