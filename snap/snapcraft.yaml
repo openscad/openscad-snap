@@ -1,6 +1,6 @@
 name: openscad
 title: OpenSCAD
-base: core18
+base: core20
 version: "2021.01"
 summary: OpenSCAD - Design. Code. Create.
 description: >
@@ -38,8 +38,9 @@ architectures:
 
 apps:
   openscad:
-    command: desktop-launch openscad
-    plugs: [desktop, x11, wayland, opengl, home, audio-playback, pulseaudio, network, removable-media, joystick]
+    command: usr/bin/openscad
+    command-chain: [ bin/desktop-launch ]
+    plugs: [desktop, desktop-legacy, x11, wayland, opengl, home, audio-playback, pulseaudio, network, removable-media, joystick]
     desktop: usr/share/applications/openscad.desktop
     environment:
       DISABLE_WAYLAND: 1
@@ -48,38 +49,35 @@ parts:
   opencsg:
     disable-parallel: true
     source: http://www.opencsg.org/OpenCSG-1.4.2.tar.gz
-    plugin: qmake
+    plugin: make
     override-build: |
       ( cd src && qmake INSTALLDIR=/usr && sed -i 's,-isystem /usr/include,,' Makefile )
       make -C src
       make -C src INSTALL_ROOT="${SNAPCRAFT_PART_INSTALL}" install
-    qt-version: qt5
     build-packages:
+    - libglew-dev
     - freeglut3-dev
     stage-packages:
-    - libglew2.0
+    - libglew2.1
 
   cgal:
     disable-parallel: true
-    source: https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-4.14.3/CGAL-4.14.3.tar.xz
+    source: https://github.com/CGAL/cgal/releases/download/v5.2/CGAL-5.2-library.tar.xz
     plugin: cmake
-    configflags: [ "-DCMAKE_BUILD_TYPE=Release" ]
+    cmake-parameters: [ "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX=/usr" ]
     build-packages:
     - cmake
     - libboost-dev
     - libboost-thread-dev
-    stage-packages:
-    - libboost-system1.65.1
-    - libboost-thread1.65.1
 
   lib3mf:
     source: https://github.com/3MFConsortium/lib3mf/archive/v1.8.1.tar.gz
     plugin: cmake
-    configflags: [ "-DCMAKE_BUILD_TYPE=RelWithDebInfo", "-DLIB3MF_TESTS=OFF" ]
-    override-pull: |
-        snapcraftctl pull
-        sed -i -e 's/\<DESCRIPTION.*/LANGUAGES CXX)/' CMakeLists.txt
-        cat -n CMakeLists.txt
+    cmake-parameters: [
+        "-DCMAKE_INSTALL_PREFIX=/usr",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DLIB3MF_TESTS=OFF"
+    ]
     build-packages:
     - uuid-dev
 
@@ -87,17 +85,24 @@ parts:
     source: https://files.openscad.org/openscad-2021.01.src.tar.gz
     #parse-info: [usr/share/metainfo/org.openscad.OpenSCAD.appdata.xml]
     disable-parallel: true
-    plugin: qmake
-    qt-version: qt5
+    plugin: make
     after: [desktop-qt5, opencsg, cgal, lib3mf]
-    project-files: [ "openscad.pro" ]
-    options: [ "PREFIX=/usr", "CONFIG-=experimental", "CONFIG-=debug", "VERSION=2021.01" ]
+    override-build: |
+      pwd
+      env | grep ^SNAP
+      cd "$SNAPCRAFT_PART_BUILD"
+      export OPENCSGDIR="${SNAPCRAFT_STAGE}"/usr
+      qmake LIBS+="-L${SNAPCRAFT_STAGE}/usr/lib" LIBS+="-L${SNAPCRAFT_STAGE}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}" PREFIX=/usr CONFIG-=experimental CONFIG-=debug VERSION=2021.01 "$SNAPCRAFT_PART_SRC"/openscad.pro
+      grep -- -L Makefile
+      make
+      make INSTALL_ROOT="${SNAPCRAFT_PART_INSTALL}" install
     build-packages:
     - git
     - qt5-default
     - qtbase5-dev
     - qtmultimedia5-dev
     - libqt5opengl5-dev
+    - libqt5gamepad5-dev
     - qt5-qmake
     - libeigen3-dev
     - libglib2.0-dev
@@ -129,24 +134,25 @@ parts:
     stage-packages:
     - qtwayland5
     - libasyncns0
-    - libboost-filesystem1.65.1
-    - libboost-regex1.65.1
-    - libboost-system1.65.1
-    - libboost-program-options1.65.1
-    - libdouble-conversion1
+    - libboost-filesystem1.71.0
+    - libboost-regex1.71.0
+    - libboost-system1.71.0
+    - libboost-program-options1.71.0
+    - libdouble-conversion3
     - libflac8
-    - libglew2.0
+    - libglew2.1
     - libglu1-mesa
     - libmpfr6
     - libogg0
     - libpulse0
-    - libqscintilla2-qt5-13
+    - libqt5gamepad5
     - libqt5multimedia5
     - libqt5printsupport5
+    - libqscintilla2-qt5-15
     - libsndfile1
     - libvorbis0a
     - libvorbisenc2
-    - libzip4
+    - libzip5
     
   # https://github.com/ubuntu/snapcraft-desktop-helpers/blob/master/snapcraft.yaml
   desktop-qt5:
