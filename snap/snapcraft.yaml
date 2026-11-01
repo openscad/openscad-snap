@@ -1,7 +1,7 @@
 name: openscad
 title: OpenSCAD
 base: core24
-version: "2026.10-TEST4"
+version: "2026.11-RC0"
 summary: OpenSCAD - Design. Code. Create.
 description: >
     OpenSCAD is a software for creating solid 3D CAD models. It is free software and
@@ -99,15 +99,15 @@ parts:
     ]
 
   openscad:
-    source: https://files.openscad.org/rc/openscad-2026.10-TEST4.src.tar.gz
-    source-checksum: sha256/cfd89bc9fb3bf48656dcbab377dc2896f6ef98f6069d04a377636d5b0cc14ed7
+    source: https://files.openscad.org/rc/openscad-2026.11-RC0.src.tar.gz
+    source-checksum: sha256/9e64122961b3bafadfb7a4581498a3e7efd50f61316806fc7a137fd699ffc9d2
     build-snaps: [cmake]
     plugin: cmake
     override-build: |
         export CC="clang"
         export CXX="clang++"
-        export OPENSCAD_COMMIT="5a864f17"
-        export OPENSCAD_VERSION="2026.10-TEST4"
+        export OPENSCAD_COMMIT="9ba0cee7"
+        export OPENSCAD_VERSION="2026.11-RC0"
         cmake ${SNAPCRAFT_PART_SRC} \
             -G 'Unix Makefiles' \
             -DCMAKE_PREFIX_PATH="${SNAPCRAFT_STAGE}/usr" \
@@ -198,7 +198,7 @@ parts:
     - libpython3.12t64
 
   desktop-qt:
-    source: https://github.com/openscad/snapcraft-desktop-helpers-Qt6
+    source: https://github.com/openscad/snapcraft-desktop-helpers-Qt6.git
     source-type: git
     source-subdir: qt
     plugin: make

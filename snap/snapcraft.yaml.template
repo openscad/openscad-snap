@@ -198,7 +198,8 @@ parts:
     - libpython3.12t64
 
   desktop-qt:
-    source: https://github.com/t4saha/snapcraft-desktop-helpers-Qt6.git
+    source: https://github.com/openscad/snapcraft-desktop-helpers-Qt6.git
+    source-type: git
     source-subdir: qt
     plugin: make
     stage:
