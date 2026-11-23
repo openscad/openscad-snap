@@ -1,7 +1,7 @@
 name: openscad
 title: OpenSCAD
 base: core24
-version: "2026.11-RC0"
+version: "2026.11-RC1"
 summary: OpenSCAD - Design. Code. Create.
 description: >
     OpenSCAD is a software for creating solid 3D CAD models. It is free software and
@@ -99,15 +99,15 @@ parts:
     ]
 
   openscad:
-    source: https://files.openscad.org/rc/openscad-2026.11-RC0.src.tar.gz
-    source-checksum: sha256/9e64122961b3bafadfb7a4581498a3e7efd50f61316806fc7a137fd699ffc9d2
+    source: https://files.openscad.org/rc/openscad-2026.11-RC1.src.tar.gz
+    source-checksum: sha256/84344272098c22c5ec40862dca1cd268ecaee1c98dfacfa90436b890e62e30ac
     build-snaps: [cmake]
     plugin: cmake
     override-build: |
         export CC="clang"
         export CXX="clang++"
-        export OPENSCAD_COMMIT="9ba0cee7"
-        export OPENSCAD_VERSION="2026.11-RC0"
+        export OPENSCAD_COMMIT="2127234b"
+        export OPENSCAD_VERSION="2026.11-RC1"
         cmake ${SNAPCRAFT_PART_SRC} \
             -G 'Unix Makefiles' \
             -DCMAKE_PREFIX_PATH="${SNAPCRAFT_STAGE}/usr" \
